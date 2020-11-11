@@ -368,7 +368,42 @@ done
 
 case $distro in
   debian)
-  if [[ "$version" =~ ^9 ]]; then
+  if [[ "$version" =~ ^10 ]]; then
+    # Install for Debian 10.x
+    tzone=$(cat /etc/timezone)
+    
+    echo "* Adding PHP repository."
+    log "apt-get install -y apt-transport-https"
+    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+    
+    echo "* Adding MariaDB 10.5 repository."
+    log "wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && chmod +x mariadb_repo_setup"
+    log "./mariadb_repo_setup --mariadb-server-version="mariadb-10.5"
+    
+    echo -n "* Updating installed packages."
+    log "apt-get update && apt-get -y upgrade" & pid=$!
+    progress
+    
+    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.3 php7.3 php7.3-curl php7.3-mysql php7.3-gd php7.3-ldap php7.3-zip php7.3-mbstring php7.3-xml php7.3-bcmath curl git unzip"
+    install_packages
+    
+    echo "* Configuring Apache."
+    create_virtualhost
+    log "a2enmod rewrite"
+    log "a2ensite $APP_NAME.conf"
+
+    set_hosts
+
+    echo "* Securing MariaDB."
+    /usr/bin/mysql_secure_installation
+
+    install_snipeit
+
+    echo "* Restarting Apache httpd."
+    log "service apache2 restart"
+  elif [[ "$version" =~ ^9 ]]; then
     # Install for Debian 9.x
     tzone=$(cat /etc/timezone)
 
