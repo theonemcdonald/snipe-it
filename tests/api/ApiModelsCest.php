@@ -31,7 +31,7 @@ class ApiAssetModelsCest
 
         $response = json_decode($I->grabResponse(), true);
         $assetmodel = App\Models\AssetModel::orderByDesc('created_at')
-            ->withCount('assets')->take(10)->get()->shuffle()->first();
+            ->withCount('assets as assets_count')->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new AssetModelsTransformer)->transformAssetModel($assetmodel)));
     }
 
@@ -77,6 +77,7 @@ class ApiAssetModelsCest
 
         $temp_assetmodel = factory(\App\Models\AssetModel::class)->states('polycomcx-model')->make([
             'name' => "updated AssetModel name",
+            'fieldset_id' => 2,
         ]);
 
         $data = [
@@ -88,6 +89,7 @@ class ApiAssetModelsCest
             'model_number' => $temp_assetmodel->model_number,
             'name' => $temp_assetmodel->name,
             'notes' => $temp_assetmodel->notes,
+            'fieldset' => $temp_assetmodel->fieldset->id,
         ];
 
         $I->assertNotEquals($assetmodel->name, $data['name']);

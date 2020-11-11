@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => 'Pengguna ini boleh log masuk',
+    'activated_disabled_help_text' => 'Anda tidak boleh kemaskini status pengaktifan akaun anda sendiri.',
     'assets_user'       => 'Serahkan harta kepada :nama',
     'bulk_update_warn'	=> 'Anda akan menyunting sifat: user_count pengguna. Sila ambil perhatian bahawa anda tidak boleh mengubah atribut pengguna anda sendiri menggunakan borang ini, dan mesti membuat pengeditan kepada pengguna anda sendiri secara individu.',
     'bulk_update_help'	=> 'Borang ini membolehkan anda mengemas kini berbilang pengguna sekaligus. Hanya isikan medan yang perlu anda ubah. Mana-mana medan yang dibiarkan kosong akan kekal tidak berubah.',
@@ -17,8 +17,9 @@ return array(
     'restore_user'		=> 'Klik di sini untuk memulihkannya.',
     'last_login'        => 'Log masuk terakhir',
     'ldap_config_text'  => 'Tetapan konfigurasi LDAP boleh didapati Admin> Tetapan. Lokasi (pilihan) yang dipilih akan ditetapkan untuk semua pengguna yang diimport.',
-    'print_assigned'    => 'Print All Assigned',
+    'print_assigned'    => 'Cetak Semua yang Diperuntukkan',
     'software_user'     => 'Perisian diagihkan kepada :nama',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Papar Pengguna :nama',
     'usercsv'           => 'Fail CSV',
     'two_factor_admin_optin_help' => 'Tetapan admin semasa anda membenarkan penguatkuasaan selektif pengesahan dua faktor.',
