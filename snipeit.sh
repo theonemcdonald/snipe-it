@@ -379,7 +379,7 @@ case $distro in
     
     echo "* Adding MariaDB 10.5 repository."
     log "wget https://downloads.mariadb.com/MariaDB/mariadb_repo_setup && chmod +x mariadb_repo_setup"
-    log "./mariadb_repo_setup --mariadb-server-version="mariadb-10.5"
+    log "./mariadb_repo_setup --mariadb-server-version=mariadb-10.5"
     
     echo -n "* Updating installed packages."
     log "apt-get update && apt-get -y upgrade" & pid=$!
